@@ -1,0 +1,22 @@
+{
+  "name": "mark",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrRickSan/godog-selenium.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrRickSan/godog-selenium/issues"
+  },
+  "homepage": "https://github.com/MrRickSan/godog-selenium#readme",
+  "devDependencies": {
+    "cucumber-html-reporter": "^4.0.4"
+  }
+}

@@ -8,14 +8,15 @@ Funcionalidade: Login
     Contexto: Formulario de login
         Dado que eu acessei a pagina principal
 
+    @success
     Cenario: Login do usuario
-        Quando faco login com "eu@ricardo.com" e "123456"
+        Quando faco login com "euricardo@getnada.com" e "Passw0rd!"
         Entao sou atenticado com sucesso
 
     Cenario: Senha incorreta
-        Quando faco login com "eu@ricardo.com" e "xpto123"
-        Entao eu devo ver a seguinte mensagem "Senha invalida"
+        Quando faco login com "euricardo@getnada.com" e "xpto123"
+        Entao eu devo ver a seguinte mensagem "Wrong username or password. Please retry"
     
     Cenario: Email invalido
-        Quando faco login com "eu#ricardo.com" e "xpto123"
-        Entao eu devo ver a seguinte mensagem "Senha invalida"
+        Quando faco login com "euricardo#getnada.com" e "xpto123"
+        Entao eu devo ver a seguinte mensagem "Wrong username or password. Please retry"
