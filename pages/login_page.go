@@ -9,9 +9,11 @@ var (
 	campoEmail = "username"
 	campoSenha = "password"
 	botaoLogin = "btnlogin"
+	alertError = "alert-error"
 )
 
-func (s *LoginPage) logIn(email, senha string) {
+// LogIn performs a login with the given email and password
+func (s *LoginPage) LogIn(email, senha string) *AccountPage {
 
 	s.Page.InputText(s.Page.FindElementByID(campoEmail), email)
 	s.Page.InputText(s.Page.FindElementByID(campoSenha), senha)
