@@ -16,4 +16,11 @@ func (s *LoginPage) logIn(email, senha string) {
 	s.Page.InputText(s.Page.FindElementByID(campoEmail), email)
 	s.Page.InputText(s.Page.FindElementByID(campoSenha), senha)
 	s.Page.FindElementByID(botaoLogin).Click()
+	return &AccountPage{Page: s.Page}
+}
+
+// GetErrorMsg returns the error message displayed in login page
+func (s *LoginPage) GetErrorMsg() string {
+	text, _ := s.Page.FindElementByClass(alertError).Text()
+	return text
 }

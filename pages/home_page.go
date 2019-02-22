@@ -6,12 +6,14 @@ type HomePage struct {
 }
 
 var (
-	signInToggle  = "dropdown-toggle"
-	logInLinkText = "https://me.hack.me/login"
+	signInToggle = "//a[@class='dropdown-toggle']"
+	logInLink    = "a[href='https://me.hack.me/login']"
 )
 
+// GoToLoginPage follow the signin option in the home page
 func (s *HomePage) GoToLoginPage() *LoginPage {
-	s.Page.MouseHoverToElement(signInToggle)
-	s.Page.FindElementByLinkText(logInLinkText).Click()
+	element := s.Page.FindElementByXPATH(signInToggle)
+	element.Click()
+	s.Page.FindElementByCSS(logInLink).Click()
 	return &LoginPage{Page: s.Page}
 }

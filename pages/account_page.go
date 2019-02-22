@@ -9,7 +9,8 @@ var (
 	myAccount = "//a[text()='My Account']"
 )
 
-func (s *LoginPage) isAuthenticated(email, senha string) bool {
+// IsAuthenticated verifies if the user is logged in or not
+func (s *AccountPage) IsAuthenticated() bool {
 	text, _ := s.Page.FindElementByXPATH(myAccount).Text()
 
 	if text != "My Account" {

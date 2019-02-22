@@ -10,49 +10,35 @@ import (
 	"github.com/DATA-DOG/godog"
 	"github.com/mrricksan/mark/pages"
 	"github.com/mrricksan/mark/support"
-	"github.com/tebeka/selenium"
 )
 
 var page pages.Page
 
 func queEuAcesseiAPaginaPrincipal() error {
-	page.Visit("https://me.hack.me/login")
-	// Driver.Get("https://me.hack.me/login")
+	page.Visit("https://hack.me")
 	return nil
 }
 
 func facoLoginComE(email, senha string) (err error) {
-	login := pages.HomePage{Page: page}
-	login.
+	homePage := pages.HomePage{Page: page}
+	homePage.GoToLoginPage().LogIn(email, senha)
 	return nil
 }
 
 func souAtenticadoComSucesso() (err error) {
-	myAccount, err := Driver.FindElement(selenium.ByXPATH, "//a[text()='My Account']")
-	if err != nil {
-		return
-	}
-
-	saida, _ := myAccount.Text()
-
-	if saida != "My Account" {
+	authenticated := pages.AccountPage{Page: page}
+	if !authenticated.IsAuthenticated() {
 		return fmt.Errorf("Erro ao validar usuário autenticado")
 	}
 	return nil
 }
 
 func euDevoVerASeguinteMensagem(msg string) (err error) {
-	divAlerta, err := Driver.FindElement(selenium.ByClassName, "alert-error")
-	if err != nil {
-		return
-	}
-
-	saida, _ := divAlerta.Text()
-
+	loginPage := pages.LoginPage{Page: page}
+	saida := loginPage.GetErrorMsg()
 	if !strings.Contains(saida, msg) {
 		return fmt.Errorf("Esperava: %v Obtido: %v", msg, saida)
 	}
-
 	return nil
 }
 
@@ -63,7 +49,7 @@ func FeatureContext(s *godog.Suite) {
 	s.Step(`^eu devo ver a seguinte mensagem "([^"]*)"$`, euDevoVerASeguinteMensagem)
 
 	s.BeforeScenario(func(interface{}) {
-		Driver = support.WDInit()
+		page.Driver = support.WDInit()
 	})
 
 	s.AfterScenario(func(i interface{}, e error) {
@@ -74,9 +60,12 @@ func FeatureContext(s *godog.Suite) {
 		rgex := regexp.MustCompile("[^0-9a-zA-Z]+")
 		fileName := strings.ToLower(rgex.ReplaceAllString(sc.Name, "-"))
 
-		shot, _ := Driver.Screenshot()
+		shot, _ := page.Driver.Screenshot()
 		support.SaveImage(shot, fileName)
 
-		Driver.Quit()
+		err := page.Driver.Quit()
+		if err != nil {
+			fmt.Println(err)
+		}
 	})
 }

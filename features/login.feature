@@ -20,3 +20,12 @@ Funcionalidade: Login
     Cenario: Email invalido
         Quando faco login com "euricardo#getnada.com" e "xpto123"
         Entao eu devo ver a seguinte mensagem "Wrong username or password. Please retry"
+
+    # Esquema do Cenario: Email ou senha incorreto
+    #     Quando faco login com "<email>" e "<senha>"
+    #     Entao eu devo ver a seguinte mensagem "<mensagem>"
+
+    #     Exemplos:
+    #         | email                  | senha      | mensagem                                         |
+    #         | euricardo@getnada.com  | xpto123    | Wrong username or password. Please retry         |
+    #         | euricardo#getnada.com  | Passw0rd!  | Wrong username or password. Please retry         |

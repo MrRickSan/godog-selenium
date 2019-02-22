@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"image"
 	"image/png"
+	"log"
 	"os"
 	"time"
 
@@ -20,7 +21,7 @@ func WDInit() selenium.WebDriver {
 	driver, err = selenium.NewRemote(caps, "")
 
 	if err != nil {
-		fmt.Println("Erro ao instanciar o driver:", err.Error())
+		log.Fatal("Erro ao instanciar o driver:", err.Error())
 	}
 
 	driver.SetImplicitWaitTimeout(time.Second * 10)
