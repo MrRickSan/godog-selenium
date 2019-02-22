@@ -8,39 +8,22 @@ import (
 	"github.com/DATA-DOG/godog/gherkin"
 
 	"github.com/DATA-DOG/godog"
+	"github.com/mrricksan/mark/pages"
 	"github.com/mrricksan/mark/support"
 	"github.com/tebeka/selenium"
 )
 
-var Driver selenium.WebDriver
+var page pages.Page
 
 func queEuAcesseiAPaginaPrincipal() error {
-	Driver.Get("https://me.hack.me/login")
+	page.Visit("https://me.hack.me/login")
+	// Driver.Get("https://me.hack.me/login")
 	return nil
 }
 
 func facoLoginComE(email, senha string) (err error) {
-	campoEmail, err := Driver.FindElement(selenium.ByID, "username")
-	if err != nil {
-		return
-	}
-
-	campoEmail.SendKeys(email)
-
-	campoSenha, err := Driver.FindElement(selenium.ByID, "password")
-	if err != nil {
-		return err
-	}
-
-	campoSenha.SendKeys(senha)
-
-	botaoLogin, err := Driver.FindElement(selenium.ByID, "btnlogin")
-	if err != nil {
-		return err
-	}
-
-	botaoLogin.Click()
-
+	login := pages.HomePage{Page: page}
+	login.
 	return nil
 }
 
